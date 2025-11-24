@@ -1,13 +1,10 @@
-# Web Dev Starter Code
+# TODO App
 
 ## Project Spec
 
-TODO: Write a project spec
-What is the general theme? For example, a photo gallery, recipe repository, Twitter clone, e-commerce inventory, API-driven data mining, generic wedding, a message board for the class, dentistry, etc.
-What is it going to do? For example: draw customers to a photography business by showing a portfolio, pricing, contact information, and booking. Mine data from IMDB to answer questions about movies and movie stars. Forum to facilitate communication between users. Etc.
-Who is the target audience? For example: The general public, family members, research scientists, students, etc.
-What sort of data will it manage? This doesn’t include static data, such as logos, headers, and footers. Think of any data that will be dynamically generated based on user form input. For example, user comments, uploaded images, credit cards, etc.
-Stretch Goals? Once your project is fully functional and demonstrates adequate scope, what extra features do you want to implement? What additional gold plating would make your website utterly awesome? Stretch goals aren’t part of your grade; they are just for your own satisfaction.
+    This project will be a simple TODO app, with the ability to retrieve/filter tasks from the backend AWS table(s). There will also be a page that displays all tasks and allows deletion of the tasks once they are completed.  In total, there should be 4 html files: index.html, add-task.html, view-tasks.html, and manage-tasks.html. The index.html file will contain the landing page with an overview and the form to submit tasks to AWS. The add-task.html file will contain the page dedicated to categorizing the already created tasks, and will allow for addition of more tasks. The view-tasks.html file will conditionally retrieve filter tasks from AWS by category, day, priority, etc. Finally, the manage-tasks.html page will display all tasks and will have deletion functionality. There will be the ability to navigate between each page as well. 
+
+    The target audience for this task is a general audience, but will particularly be useful for students, as the filters can allow tagging for tasks, assignments due, or events in their schedule. The data involved with this project will be the tasks, and the tags for each individual one that will allow the functionality in filtering and displaying the intended tasks. Once I have all of my intended functionality and front-end basics on the app, I hope to implement the ability to display tasks by the day of the week, whether that is a separate page, or I modify the original deletion page to do so. Another functionality that I would like to implement would be the ability for the user to create their own tags, and to have multiple tags on each task instead of just one in one of the three categories (tasks, assignments due, or events). Lastly, an addition that could be really useful is identifying the priority of tasks, and organizing them, when retrieved, by the order of their priority. On the backend, I'm not fully certain how many tables I will require through AWS, but there will definitely need to be GET, PUT, and DELETE actions.
 
 ## Project Wireframe
 
