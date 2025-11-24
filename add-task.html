@@ -1,0 +1,26 @@
+<body>
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="add-task.html">Add Task</a>
+    <a href="view-tasks.html">Search Tasks</a>
+    <a href="manage-tasks.html">Manage All</a>
+  </nav>
+    <form id="addTaskForm">
+    <input type="text" id="title" required maxlength="100">
+    <textarea id="description" maxlength="500"></textarea>
+
+    <!--<select id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>-->
+
+    <input type="date" id="dueDate">
+    <select id="category">
+        <option value="work">Task</option>
+        <option value="personal">Due</option>
+        <option value="shopping">Event</option>
+    </select>
+    <button type="submit">Submit to AWS</button>
+    </form>
+</body>

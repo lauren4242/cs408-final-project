@@ -1,0 +1,32 @@
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="add-task.html">Add Task</a>
+        <a href="view-tasks.html">Search Tasks</a>
+        <a href="manage-tasks.html">Manage All</a>
+    </nav>
+    <button id="loadAllTasks">Load All Tasks from AWS</button>
+
+    <div class="stats">
+    <span>Total: <span id="totalCount">0</span></span>
+    <span>Active: <span id="activeCount">0</span></span>
+    <span>Completed: <span id="completedCount">0</span></span>
+    </div>
+
+    <table id="allTasksTable">
+    <thead>
+        <tr>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Each row has a delete button -->
+    </tbody>
+    </table>
+
+    <button id="clearCompleted">Delete All Completed</button>
+</body>

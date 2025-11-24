@@ -1,0 +1,33 @@
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="add-task.html">Add Task</a>
+        <a href="view-tasks.html">Search Tasks</a>
+        <a href="manage-tasks.html">Manage All</a>
+    </nav>
+
+    <form id="filterForm">
+    <label>Filter by:</label>
+    <select id="filterCategory">
+        <option value="work">Task</option>
+        <option value="personal">Due</option>
+        <option value="shopping">Event</option>
+    </select>
+    
+    <!--<select id="filterPriority">
+        <option value="">All Priorities</option>
+        <option value="high">High</option>
+    </select>-->
+    
+    <select id="filterStatus">
+        <option value="active">Active Only</option>
+        <option value="completed">Completed Only</option>
+    </select>
+    
+    <button type="button" id="searchBtn">Search AWS</button>
+    </form>
+
+    <div id="filteredResults">
+    <!-- Dynamically populated with filtered tasks -->
+    </div>
+</body>
