@@ -8,6 +8,4 @@
 
 ## Project Wireframe
 
-TODO: Replace the wireframe below with you own design.
-
-![wireframe](wireframe-example.png)
+TODO: Wireframes for each page
