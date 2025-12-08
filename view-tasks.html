@@ -1,33 +1,80 @@
-<body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="add-task.html">Add Task</a>
-        <a href="view-tasks.html">Search Tasks</a>
-        <a href="manage-tasks.html">Manage All</a>
-    </nav>
+<!doctype html>
+<html lang="en">
 
-    <form id="filterForm">
-    <label>Filter by:</label>
-    <select id="filterCategory">
-        <option value="work">Task</option>
-        <option value="personal">Due</option>
-        <option value="shopping">Event</option>
-    </select>
-    
-    <!--<select id="filterPriority">
-        <option value="">All Priorities</option>
-        <option value="high">High</option>
-    </select>-->
-    
-    <select id="filterStatus">
-        <option value="active">Active Only</option>
-        <option value="completed">Completed Only</option>
-    </select>
-    
-    <button type="button" id="searchBtn">Search AWS</button>
+<head>
+  <meta charset="utf-8">
+  <title>Search Tasks - TODO List</title>
+  <meta name="description" content="Filter and search your tasks">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">TODO Manager</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-task.html">Add Task</a></li>
+      <li><a href="view-tasks.html" class="active">Search Tasks</a></li>
+      <li><a href="manage-tasks.html">Manage All</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <section class="page-header">
+      <h1>Search & Filter Tasks</h1>
+      <p>Find specific tasks using filters below</p>
+    </section>
+
+    <form id="filterForm" class="filter-section">
+      <div class="filter-grid">
+        <div class="form-group">
+          <label for="filterCategory">Category</label>
+          <select id="filterCategory" name="category">
+            <option value="">All Categories</option>
+            <option value="tasks">Tasks</option>
+            <option value="assignments">Assignments Due</option>
+            <option value="events">Events</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="filterPriority">Priority</label>
+          <select id="filterPriority" name="priority">
+            <option value="">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus" name="status">
+            <option value="">All Status</option>
+            <option value="active">Active Only</option>
+            <option value="completed">Completed Only</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" id="searchBtn" class="btn btn-primary">Search AWS Database</button>
     </form>
 
-    <div id="filteredResults">
-    <!-- Dynamically populated with filtered tasks -->
-    </div>
+    <section class="results-section">
+      <h2>Filtered Results</h2>
+      <div id="resultsCount" class="results-count">No results yet. Use filters above to search.</div>
+      <div id="filteredResults" class="task-grid">
+        <!-- Dynamically populated with filtered tasks -->
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>TODO List Manager</p>
+  </footer>
+
+  <script type="module" src="js/view-tasks.js"></script>
 </body>
+
+</html>

@@ -1,32 +1,70 @@
-<body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="add-task.html">Add Task</a>
-        <a href="view-tasks.html">Search Tasks</a>
-        <a href="manage-tasks.html">Manage All</a>
-    </nav>
-    <button id="loadAllTasks">Load All Tasks from AWS</button>
+<!doctype html>
+<html lang="en">
 
-    <div class="stats">
-    <span>Total: <span id="totalCount">0</span></span>
-    <span>Active: <span id="activeCount">0</span></span>
-    <span>Completed: <span id="completedCount">0</span></span>
+<head>
+  <meta charset="utf-8">
+  <title>Manage All Tasks - TODO List</title>
+  <meta name="description" content="View and manage all your tasks">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">TODO Manager</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-task.html">Add Task</a></li>
+      <li><a href="view-tasks.html">Search Tasks</a></li>
+      <li><a href="manage-tasks.html" class="active">Manage All</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <section class="page-header">
+      <h1>Manage All Tasks</h1>
+      <p>View, complete, and delete all your tasks</p>
+    </section>
+
+    <div class="action-bar">
+      <button id="loadAllTasks" class="btn btn-primary">Load All Tasks from AWS</button>
+      <button id="clearCompleted" class="btn btn-danger">Delete All Completed</button>
     </div>
 
-    <table id="allTasksTable">
-    <thead>
-        <tr>
-        <th>Title</th>
-        <th>Priority</th>
-        <th>Due Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Each row has a delete button -->
-    </tbody>
-    </table>
+    <div class="task-statistics">
+      <span class="stat-badge">Total: <strong id="totalCount">0</strong></span>
+      <span class="stat-badge">Active: <strong id="activeCount">0</strong></span>
+      <span class="stat-badge">Completed: <strong id="completedCount">0</strong></span>
+    </div>
 
-    <button id="clearCompleted">Delete All Completed</button>
+    <div class="table-container">
+      <table id="allTasksTable" class="tasks-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tasksTableBody">
+          <tr>
+            <td colspan="6" class="empty-state">Click "Load All Tasks" to retrieve your tasks from AWS</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="manageMessage" class="message"></div>
+  </div>
+
+  <footer class="footer">
+    <p>TODO List Manager</p>
+  </footer>
+
+  <script type="module" src="js/manage-tasks.js"></script>
 </body>
+
+</html>
