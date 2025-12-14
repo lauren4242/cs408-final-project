@@ -16,3 +16,6 @@ TODO: Wireframes for each page
 Sanitizing: 
 - https://web.dev/articles/sanitizer 
 - https://www.xjavascript.com/blog/sanitizing-user-input-before-adding-it-to-the-dom-in-javascript/#google_vignette
+
+Error Handling on Javascript files:
+Github Copilot

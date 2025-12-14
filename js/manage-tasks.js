@@ -4,29 +4,136 @@ window.onload = function() {
     
     loadBtn.addEventListener('click', loadAllTasks);
     clearBtn.addEventListener('click', clearCompleted);
+    
+    // Make functions globally accessible for onclick handlers
+    window.deleteTask = deleteTask;
+    window.toggleStatus = toggleStatus;
 };
 
 function loadAllTasks() {
-    console.log('Loading ALL tasks from AWS...');
-    // TODO: Retrieve ALL database entries from AWS
-    
     const tbody = document.getElementById('tasksTableBody');
     tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Loading tasks from AWS...</td></tr>';
     
-    // Mock data load
-    setTimeout(() => {
-        tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No tasks found. Add tasks from the Add Task page.</td></tr>';
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const tasks = JSON.parse(xhr.response);
+            const validTasks = tasks.filter(task => task.title);
+        
+            if (validTasks.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No tasks found. Add tasks from the Add Task page.</td></tr>';
+                updateStats(0, 0, 0);
+            } else {
+                tbody.innerHTML = '';
+                
+                let activeCount = 0;
+                let completedCount = 0;
+                
+                validTasks.forEach(task => {
+                    if (task.status === 'completed') {
+                        completedCount++;
+                    } else {
+                        activeCount++;
+                    }
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${task.title}</td>
+                        <td>${task.category}</td>
+                        <td><span class="badge badge-${task.priority}">${task.priority}</span></td>
+                        <td><span class="badge badge-${task.status}">${task.status}</span></td>
+                        <td>${task.dueDate}</td>
+                        <td>
+                            <button class="btn-action" onclick="toggleStatus('${task.id}', '${task.status}')">
+                                ${task.status === 'completed' ? 'Reopen' : 'Complete'}
+                            </button>
+                            <button class="btn-delete" onclick="deleteTask('${task.id}')">Delete</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                updateStats(validTasks.length, activeCount, completedCount);
+            }
+        } else {
+            tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Error loading tasks. Please try again.</td></tr>';
+            updateStats(0, 0, 0);
+        }
+    });
+    xhr.addEventListener("error", function () {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Network error. Please check your connection.</td></tr>';
         updateStats(0, 0, 0);
-    }, 500);
+    });
+    xhr.open("GET", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo");
+    xhr.send();
 }
 
 function clearCompleted() {
-    console.log('Deleting all completed tasks from AWS...');
-    // TODO: Delete completed tasks from AWS
+    const message = document.getElementById('manageMessage');
+    message.textContent = 'Checking for completed tasks...';
+    message.className = 'message';
+    
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const tasks = JSON.parse(xhr.response);
+            const completedTasks = tasks.filter(task => task.status === 'completed');
+            
+            if (completedTasks.length === 0) {
+                message.textContent = 'No completed tasks to delete.';
+                message.className = 'message';
+                return;
+            }
+            
+            let deleteCount = 0;
+            completedTasks.forEach(task => {
+                let deleteXhr = new XMLHttpRequest();
+                deleteXhr.addEventListener("load", function () {
+                    deleteCount++;
+                    if (deleteCount === completedTasks.length) {
+                        message.textContent = `${deleteCount} completed task(s) deleted!`;
+                        message.className = 'message success';
+                        loadAllTasks();
+                    }
+                });
+                deleteXhr.open("DELETE", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo/" + task.id);
+                deleteXhr.setRequestHeader("Content-Type", "application/json");
+                deleteXhr.send();
+            });
+        } else {
+            message.textContent = 'Error loading tasks. Please try again.';
+            message.className = 'message error';
+        }
+    });
+    xhr.open("GET", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo");
+    xhr.send();
+}
+
+function deleteTask(taskId) {
+    if (!confirm('Are you sure you want to delete this task?')) {
+        return;
+    }
+    
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const message = document.getElementById('manageMessage');
+            message.textContent = 'Task deleted!';
+            message.className = 'message success';
+            loadAllTasks();
+        }
+    });
+    xhr.open("DELETE", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo/" + taskId);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+}
+
+function toggleStatus(taskId, currentStatus) {
+    const newStatus = currentStatus === 'completed' ? 'pending' : 'completed';
     
     const message = document.getElementById('manageMessage');
-    message.textContent = 'Completed tasks deleted!';
-    message.className = 'message success';
+    message.textContent = 'Status toggle requires full task update implementation.';
+    message.className = 'message';
 }
 
 function updateStats(total, active, completed) {
