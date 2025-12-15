@@ -336,6 +336,72 @@ body {
   font-size: 1.1rem;
 }
 
+/* Task Display Cards (for view-tasks.html) */
+.task-display-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 5px solid #ccc;
+}
+
+.task-display-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.task-display-card.priority-high {
+  border-color: #3498DB;
+}
+
+.task-display-card.priority-medium {
+  border-color: #9B59B6;
+}
+
+.task-display-card.priority-low {
+  border-color: #7CB342;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.task-card-header h3 {
+  color: #2F5233;
+  font-size: 1.3rem;
+  margin: 0;
+  flex: 1;
+}
+
+.task-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-description {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.task-details {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.due-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .navbar {

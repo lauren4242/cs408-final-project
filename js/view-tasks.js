@@ -26,7 +26,9 @@ function handleSearch() {
                 filteredTasks = filteredTasks.filter(task => task.priority === priority);
             }
             if (status !== '' && status !== 'all') {
-                filteredTasks = filteredTasks.filter(task => task.status === status);
+                // Map "active" to "pending" since that's the actual status value
+                const statusToFilter = status === 'active' ? 'pending' : status;
+                filteredTasks = filteredTasks.filter(task => task.status === statusToFilter);
             }
             
             displayResults(filteredTasks);
@@ -71,14 +73,18 @@ function displayResults(tasks) {
     });
     
     resultsContainer.innerHTML = validTasks.map(task => `
-        <div class="task-card priority-${task.priority || 'medium'}">
-            <h3>${task.title}</h3>
-            <p>${task.description || 'No description'}</p>
-            <div class="task-meta">
-                <span class="badge badge-${task.category}">${task.category}</span>
+        <div class="task-display-card priority-${task.priority || 'medium'}">
+            <div class="task-card-header">
+                <h3>${task.title}</h3>
                 <span class="badge badge-${task.priority}">${task.priority}</span>
-                <span class="badge badge-${task.status}">${task.status}</span>
-                <span class="due-date">Due: ${task.dueDate}</span>
+            </div>
+            <div class="task-card-body">
+                <p class="task-description"><strong>Description:</strong> ${task.description || 'No description'}</p>
+                <div class="task-details">
+                    <span><strong>Category:</strong> ${task.category}</span>
+                    <span><strong>Status:</strong> ${task.status}</span>
+                </div>
+                <div class="due-date"><strong>📅 Due:</strong> ${task.dueDate}</div>
             </div>
         </div>
     `).join('');

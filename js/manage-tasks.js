@@ -160,9 +160,32 @@ function deleteTask(taskId) {
 function toggleStatus(taskId, currentStatus) {
     const newStatus = currentStatus === 'completed' ? 'pending' : 'completed';
     
-    const message = document.getElementById('manageMessage');
-    message.textContent = 'Status toggle requires full task update implementation.';
-    message.className = 'message';
+    // First, get the full task object
+    let getXhr = new XMLHttpRequest();
+    getXhr.addEventListener("load", function () {
+        if (getXhr.status >= 200 && getXhr.status < 300) {
+            const task = JSON.parse(getXhr.response);
+            
+            // Update the status
+            task.status = newStatus;
+            
+            // Save the updated task back to AWS
+            let putXhr = new XMLHttpRequest();
+            putXhr.addEventListener("load", function () {
+                if (putXhr.status >= 200 && putXhr.status < 300) {
+                    const message = document.getElementById('manageMessage');
+                    message.textContent = `Task marked as ${newStatus}!`;
+                    message.className = 'message success';
+                    loadAllTasks(); // Reload the table
+                }
+            });
+            putXhr.open("PUT", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo");
+            putXhr.setRequestHeader("Content-Type", "application/json");
+            putXhr.send(JSON.stringify(task));
+        }
+    });
+    getXhr.open("GET", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo/" + taskId);
+    getXhr.send();
 }
 
 function updateStats(total, active, completed) {

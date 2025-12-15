@@ -17,7 +17,7 @@ Sanitizing:
 - https://web.dev/articles/sanitizer 
 - https://www.xjavascript.com/blog/sanitizing-user-input-before-adding-it-to-the-dom-in-javascript/#google_vignette
 
-Error Handling on Javascript files:
+Error Handling on Javascript files & Display cards for filtered results:
 - Github Copilot
 
 Dates:
