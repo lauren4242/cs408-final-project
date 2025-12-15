@@ -57,6 +57,19 @@ function displayResults(tasks) {
         return;
     }
     
+    // Check and update categories for tasks due today
+    const today = new Date().toISOString().split('T')[0];
+    validTasks.forEach(task => {
+        if (task.dueDate === today && task.category === 'tasks') {
+            // Update in AWS
+            let xhr = new XMLHttpRequest();
+            xhr.open("PUT", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            task.category = 'assignments due';
+            xhr.send(JSON.stringify(task));
+        }
+    });
+    
     resultsContainer.innerHTML = validTasks.map(task => `
         <div class="task-card priority-${task.priority || 'medium'}">
             <h3>${task.title}</h3>

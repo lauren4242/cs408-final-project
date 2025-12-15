@@ -10,6 +10,32 @@ window.onload = function() {
     window.toggleStatus = toggleStatus;
 };
 
+// Helper function to check if task is due today and update category if needed
+function checkAndUpdateCategory(task) {
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    
+    // If task is due today and category is 'tasks', update it to 'assignments due'
+    if (task.dueDate === today && task.category === 'tasks') {
+        // Update the task in AWS
+        let xhr = new XMLHttpRequest();
+        xhr.open("PUT", "https://dpxlw1jjt8.execute-api.us-east-2.amazonaws.com/todo");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        
+        // Create updated task object
+        const updatedTask = {
+            ...task,
+            category: 'assignments due'
+        };
+        
+        xhr.send(JSON.stringify(updatedTask));
+        
+        // Return updated task for display
+        return updatedTask;
+    }
+    
+    return task;
+}
+
 function loadAllTasks() {
     const tbody = document.getElementById('tasksTableBody');
     tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Loading tasks from AWS...</td></tr>';
@@ -30,6 +56,9 @@ function loadAllTasks() {
                 let completedCount = 0;
                 
                 validTasks.forEach(task => {
+                    // Check and update category if due today
+                    task = checkAndUpdateCategory(task);
+                    
                     if (task.status === 'completed') {
                         completedCount++;
                     } else {

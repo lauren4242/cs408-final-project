@@ -18,4 +18,7 @@ Sanitizing:
 - https://www.xjavascript.com/blog/sanitizing-user-input-before-adding-it-to-the-dom-in-javascript/#google_vignette
 
 Error Handling on Javascript files:
-Github Copilot
+- Github Copilot
+
+Dates:
+- https://www.w3schools.com/js/js_date_methods.asp
