@@ -78,7 +78,7 @@ body {
 }
 
 .hook p {
-  color: #777;
+  color: #555;
   font-size: 1.2rem;
 }
 
@@ -179,7 +179,7 @@ body {
 }
 
 .btn-danger {
-  background-color: #f44336;
+  background-color: #c62828;
   color: white;
 }
 
@@ -221,7 +221,7 @@ body {
 }
 
 .stat-card p {
-  color: #777;
+  color: #555;
   font-weight: 500;
 }
 
@@ -276,7 +276,7 @@ body {
 
 .empty-state {
   text-align: center;
-  color: #999;
+  color: #555;
   padding: 3rem !important;
 }
 
@@ -314,7 +314,7 @@ body {
 }
 
 .results-count {
-  color: #777;
+  color: #555;
   margin-bottom: 1.5rem;
 }
 
@@ -329,7 +329,7 @@ body {
 /* Footer */
 .footer {
   background-color: #D4A5A5;
-  color: #2F5233;
+  color: #1a2e1b;
   text-align: center;
   padding: 1.5rem;
   margin-top: 3rem;
