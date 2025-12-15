@@ -20,5 +20,9 @@ Sanitizing:
 Error Handling on Javascript files & Display cards for filtered results:
 - Github Copilot
 
-Dates:
+Date recognition for tasks (to change to Assignments Due category):
 - https://www.w3schools.com/js/js_date_methods.asp
+
+QUnit testing:
+- https://www.testim.io/blog/qunit-tutorial-start-unit-testing-and-measuring-code-coverage/
+- https://www.tutorialspoint.com/qunit/index.htm
